@@ -1,0 +1,15 @@
+#ifndef ASR_UTIL_CONFIG_H
+#define ASR_UTIL_CONFIG_H
+
+#include <string>
+
+namespace asr
+{
+    namespace util
+    {
+        const int kVersionMajor = @ASR_UTIL_VERSION_MAJOR@;
+        const int kVersionMinor = @ASR_UTIL_VERSION_MINOR@;
+    }
+}
+
+#endif

@@ -1,0 +1,45 @@
+From ffab3f2b7b6f099ec871279904eadb6daf3f5ecd Mon Sep 17 00:00:00 2001
+From: Yoichi Izumi <quanyangyi0323@gmail.com>
+Date: Sun, 16 Sep 2018 14:27:58 +0900
+Subject: [PATCH] =?UTF-8?q?[fix]=20CentOS6=20=E3=83=93=E3=83=AB=E3=83=89?=
+ =?UTF-8?q?=E5=A4=B1=E6=95=97?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ fmt/format.h        | 3 ++-
+ test/format-test.cc | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/fmt/format.h b/fmt/format.h
+index 561a9e0..b0c67cd 100644
+--- a/fmt/format.h
++++ b/fmt/format.h
+@@ -4052,7 +4052,8 @@ ArgJoin<wchar_t, It> join(It first, It last, const BasicCStringRef<wchar_t>& sep
+   return ArgJoin<wchar_t, It>(first, last, sep);
+ }
+ 
+-#if FMT_HAS_GXX_CXX11
++#if FMT_HAS_GXX_CXX11 && \
++    (!FMT_GCC_VERSION || FMT_GCC_VERSION >= 405 || __clang__)
+ template <typename Range>
+ auto join(const Range& range, const BasicCStringRef<char>& sep)
+     -> ArgJoin<char, decltype(std::begin(range))> {
+diff --git a/test/format-test.cc b/test/format-test.cc
+index f512ef4..562db99 100644
+--- a/test/format-test.cc
++++ b/test/format-test.cc
+@@ -1598,7 +1598,8 @@ TEST(FormatTest, JoinArg) {
+ 
+   EXPECT_EQ(L"(1, 2, 3)", format(L"({})", join(v1 + 0, v1 + 3, L", ")));
+ 
+-#if FMT_HAS_GXX_CXX11
++#if FMT_HAS_GXX_CXX11 && \
+++    (!FMT_GCC_VERSION || FMT_GCC_VERSION >= 405 || __clang__)
+   EXPECT_EQ("(1, 2, 3)", format("({})", join(v1, ", ")));
+   EXPECT_EQ("(+01.20, +03.40)", format("({:+06.2f})", join(v2, ", ")));
+ #endif
+-- 
+2.16.2
+
