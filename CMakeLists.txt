@@ -102,7 +102,7 @@ if (CMAKE_CXX_CPPCHECK)
             "––project=complile_commands.json"
             "--enable=warning,performance,portability"
             "-i ${CMAKE_SOURCE_DIR}/vendor"
-            "--suppressions-list=${CMAKE_SOURCE_DIR}/CppCheckSuppressions.txt"
+            "--suppressions-list=${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.txt"
     )
     message("## CMAKE_CXX_CPPCHECK: ${CMAKE_CXX_CPPCHECK}")
 endif()
