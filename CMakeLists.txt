@@ -64,30 +64,6 @@ ExternalProject_Add(
   STEP_TARGETS download
   EXCLUDE_FROM_ALL TRUE
 )
-
-###
-# {fmt}
-ExternalProject_Add(
-  external_fmt
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG 4.1.0
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/fmt
-  PATCH_COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/vendor/fmt && git apply ${CMAKE_CURRENT_SOURCE_DIR}/patch/0001-fmt-fix-CentOS6.patch
-  STEP_TARGETS build
-  EXCLUDE_FROM_ALL TRUE
-)
-###
-
-###
-# plog
-ExternalProject_Add(
-  external_plog
-  GIT_REPOSITORY https://github.com/SergiusTheBest/plog.git
-  GIT_TAG 1.1.4
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/plog
-  STEP_TARGETS download
-  EXCLUDE_FROM_ALL TRUE
-)
 ###
 #####
 
