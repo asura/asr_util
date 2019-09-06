@@ -2,6 +2,7 @@
 #define ASR_UTIL_RESULT_H
 
 #include <string>
+#include <system_error>
 
 namespace asr
 {
@@ -25,11 +26,17 @@ public:
     /// 異常時に使うコンストラクタ
     explicit Result(std::string&& the_error_message);
 
+    /// 異常時に使うコンストラクタ
+    explicit Result(std::error_code&& the_error_code);
+
     /// 成功ならtrue, 失敗ならfalse
     bool succeed() const;
 
     /// エラーメッセージを返す
     const std::string& errorMessage() const;
+
+private:
+    static std::string convertErrorCodeToString(const std::error_code& the_error_code);
 };
 }  // namespace util
 }  // namespace asr

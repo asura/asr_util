@@ -18,6 +18,14 @@ TEST_CASE("Result::Result(異常系)", "[unit][asr::util::Result]")
     CHECK(sut.errorMessage() == "異常発生");
 }
 
+TEST_CASE("Result::Result(異常系・error_code版)", "[unit][asr::util::Result]")
+{
+    asr::util::Result sut(std::make_error_code(std::errc::invalid_argument));
+
+    CHECK(sut.succeed() == false);
+    CHECK(sut.errorMessage() == "[generic] Invalid argument");
+}
+
 TEST_CASE("Result::Result(コピー)", "[unit][asr::util::Result]")
 {
     WHEN("正常系インスタンスのコピー")
