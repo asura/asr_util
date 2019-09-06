@@ -7,7 +7,7 @@ TEST_CASE("Result::Result(正常系)", "[unit][asr::util::Result]")
     asr::util::Result sut;
 
     CHECK(sut.succeed() == true);
-    CHECK(sut.error_message().empty());
+    CHECK(sut.errorMessage().empty());
 }
 
 TEST_CASE("Result::Result(異常系)", "[unit][asr::util::Result]")
@@ -15,7 +15,7 @@ TEST_CASE("Result::Result(異常系)", "[unit][asr::util::Result]")
     asr::util::Result sut("異常発生");
 
     CHECK(sut.succeed() == false);
-    CHECK(sut.error_message() == "異常発生");
+    CHECK(sut.errorMessage() == "異常発生");
 }
 
 TEST_CASE("Result::Result(コピー)", "[unit][asr::util::Result]")
@@ -23,19 +23,19 @@ TEST_CASE("Result::Result(コピー)", "[unit][asr::util::Result]")
     WHEN("正常系インスタンスのコピー")
     {
         asr::util::Result other;
-        asr::util::Result sut(other);
+        asr::util::Result sut(other);  // NOLINT(performance-unnecessary-copy-initialization)
 
         CHECK(sut.succeed() == true);
-        CHECK(sut.error_message().empty());
+        CHECK(sut.errorMessage().empty());
     }
 
     WHEN("異常系インスタンスのコピー")
     {
         asr::util::Result other("異常発生");
-        asr::util::Result sut(other);
+        asr::util::Result sut(other);  // NOLINT(performance-unnecessary-copy-initialization
 
         CHECK(sut.succeed() == false);
-        CHECK(sut.error_message() == other.error_message());
-        CHECK(&sut.error_message() != &other.error_message());
+        CHECK(sut.errorMessage() == other.errorMessage());
+        CHECK(&sut.errorMessage() != &other.errorMessage());
     }
 }

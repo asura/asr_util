@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 project(
   asr_util
@@ -49,6 +49,10 @@ if (ENABLE_COVERAGE)
   )
   message("## Enable Coverage")
 endif()
+
+#######################################
+# clang-tidyを実行させる (要 CMake 3.6)
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-header-filter=${CMAKE_SOURCE_DIR}/include")
 
 #######################################
 # CppCheck対応 (要 CMake 3.10)

@@ -1,5 +1,5 @@
-#ifndef ASR_UTIL_RESULT_H_
-#define ASR_UTIL_RESULT_H_
+#ifndef ASR_UTIL_RESULT_H
+#define ASR_UTIL_RESULT_H
 
 #include <string>
 
@@ -15,23 +15,23 @@ namespace util
 /// expected<bool, std::string>と近い。
 class Result
 {
-    bool m_result;                ///< 成功 or 失敗
+    bool m_result{true};          ///< 成功 or 失敗
     std::string m_error_message;  ///< 失敗時の何らかのメッセージ
 
 public:
     /// 正常時に使うコンストラクタ
-    Result();
+    Result() = default;
 
     /// 異常時に使うコンストラクタ
-    explicit Result(const std::string& error_message);
+    explicit Result(std::string&& the_error_message);
 
     /// 成功ならtrue, 失敗ならfalse
     bool succeed() const;
 
     /// エラーメッセージを返す
-    const std::string& error_message() const;
+    const std::string& errorMessage() const;
 };
 }  // namespace util
 }  // namespace asr
 
-#endif /* !ASR_UTIL_RESULT_H_ */
+#endif  // ASR_UTIL_RESULT_H
