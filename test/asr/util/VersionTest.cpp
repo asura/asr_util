@@ -1,5 +1,6 @@
-#include <catch2/catch.hpp>
 #include "asr/util/config.h"
+
+#include <catch2/catch.hpp>
 
 TEST_CASE("asr::util::VERSION", "[asr::util]")
 {
