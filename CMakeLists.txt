@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(asr_util CXX)
+project(
+  asr_util
+  VERSION 0.1.0
+  LANGUAGES CXX
+)
 
-set(CMAKE_CXX_STANDARD 98)
-set(ASR_UTIL_VERSION_MAJOR 0)
-set(ASR_UTIL_VERSION_MINOR 1)
+# C++規格
+set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -48,26 +51,6 @@ if (ENABLE_COVERAGE)
 endif()
 
 #######################################
-# 外部パッケージ
-
-#######################################
-# 外部プロジェクト
-include(ExternalProject)
-
-###
-# Catch 1
-ExternalProject_Add(
-  external_catch
-  GIT_REPOSITORY https://github.com/philsquared/Catch.git
-  GIT_TAG v1.12.2
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/Catch
-  STEP_TARGETS download
-  EXCLUDE_FROM_ALL TRUE
-)
-###
-#####
-
-#######################################
 # CppCheck対応 (要 CMake 3.10)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -94,3 +77,4 @@ configure_file(
 # 本体
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(vendor/Catch2)

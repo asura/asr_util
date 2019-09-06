@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include "asr/util/Result.h"
 
 TEST_CASE("Result::Result(正常系)", "[unit][asr::util::Result]")

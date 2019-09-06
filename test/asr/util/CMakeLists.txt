@@ -1,7 +1,7 @@
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
   ${PROJECT_BINARY_DIR}/include
-  ${PROJECT_SOURCE_DIR}/vendor/Catch/single_include
+  ${PROJECT_SOURCE_DIR}/vendor/Catch2/single_include
 )
 
 add_executable(
@@ -14,11 +14,6 @@ add_executable(
 target_link_libraries(
   Tester_asr_util
   asr_util
-)
-
-add_dependencies(
-  Tester_asr_util
-  external_catch-download
 )
 
 add_test(
