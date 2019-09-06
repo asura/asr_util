@@ -1,0 +1,13 @@
+diff --git a/single_include/catch2/catch.hpp b/single_include/catch2/catch.hpp
+index 5feb2a4..01f7e18 100644
+--- a/single_include/catch2/catch.hpp
++++ b/single_include/catch2/catch.hpp
+@@ -4283,7 +4283,7 @@ namespace Catch {
+ 
+     inline IMutableContext& getCurrentMutableContext()
+     {
+-        if( !IMutableContext::currentContext )
++        while( !IMutableContext::currentContext )
+             IMutableContext::createContext();
+         return *IMutableContext::currentContext;
+     }
