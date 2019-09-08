@@ -7,6 +7,7 @@ add_executable(
   Tester_asr_util
   Tester.cpp
   ResultTest.cpp
+  Result2Test.cpp
   VersionTest.cpp
 )
 
