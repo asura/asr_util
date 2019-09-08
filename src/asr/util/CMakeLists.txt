@@ -5,4 +5,5 @@ include_directories(
 add_library(
   asr_util
   Result.cpp
+  string_utils.cpp
 )

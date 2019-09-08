@@ -9,6 +9,7 @@ add_executable(
   ResultTest.cpp
   Result2Test.cpp
   VersionTest.cpp
+  string_utilsTest.cpp
 )
 
 target_link_libraries(

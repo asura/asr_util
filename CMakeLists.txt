@@ -29,6 +29,8 @@ set(CMAKE_CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 
+add_definitions(-DCATCH_CONFIG_ENABLE_BENCHMARKING)
+
 #######################################
 # CTest有効化
 enable_testing()
