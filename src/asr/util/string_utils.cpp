@@ -76,7 +76,7 @@ split(
         }
         else
         {
-            result.emplace_back(std::string{the_string.data() + first, last - first});
+            result.emplace_back(the_string.data() + first, last - first);
         }
 
         first = last + 1;
