@@ -9,51 +9,115 @@ TEST_CASE(
 {
     std::vector<std::string> doc;
 
-    WHEN("結合元が空")
+    SECTION("結合元が空")
     {
         const std::string result = asr::util::join(doc, 'A');
 
         CHECK(result.empty());
     }
 
-    WHEN("結合元が1件のみ")
+    SECTION("結合元が1件のみ")
     {
-        doc.emplace_back("abcde");
-
-        const std::string result = asr::util::join(doc, 'A');
-
-        CHECK(result == "abcde");
-    }
-
-    WHEN("結合元が2件")
-    {
-        doc.emplace_back("abc");
-        doc.emplace_back("def");
-
-        AND_WHEN("結合文字が空文字")
+        SECTION("空文字列")
         {
-            const std::string result = asr::util::join(doc, 0x00);
+            doc.emplace_back("");
 
-            CHECK(result == "abcdef");
+            const std::string result = asr::util::join(doc, 'A');
+
+            CHECK(result.empty());
         }
 
-        AND_WHEN("結合文字が非空文字")
+        SECTION("非空文字列")
         {
-            const std::string result = asr::util::join(doc, ',');
+            doc.emplace_back("abcde");
 
-            CHECK(result == "abc,def");
+            const std::string result = asr::util::join(doc, 'A');
+
+            CHECK(result == "abcde");
         }
     }
 
-    WHEN("結合元が3件")
+    SECTION("結合元が2件")
     {
-        doc.emplace_back("abc");
-        doc.emplace_back("def");
-        doc.emplace_back("ghi");
+        SECTION("空、空")
+        {
+            doc.emplace_back("");
+            doc.emplace_back("");
 
-        const std::string result = asr::util::join(doc, ',');
+            SECTION("結合文字が空文字")
+            {
+                const std::string result = asr::util::join(doc, 0x00);
 
-        CHECK(result == "abc,def,ghi");
+                CHECK(result.empty());
+            }
+
+            SECTION("結合文字が非空文字")
+            {
+                const std::string result = asr::util::join(doc, ',');
+
+                CHECK(result == ",");
+            }
+        }
+
+        SECTION("空、非空")
+        {
+            doc.emplace_back("");
+            doc.emplace_back("def");
+
+            SECTION("結合文字が空文字")
+            {
+                const std::string result = asr::util::join(doc, 0x00);
+
+                CHECK(result == "def");
+            }
+
+            SECTION("結合文字が非空文字")
+            {
+                const std::string result = asr::util::join(doc, ',');
+
+                CHECK(result == ",def");
+            }
+        }
+
+        SECTION("非空、空")
+        {
+            doc.emplace_back("abc");
+            doc.emplace_back("");
+
+            SECTION("結合文字が空文字")
+            {
+                const std::string result = asr::util::join(doc, 0x00);
+
+                CHECK(result == "abc");
+            }
+
+            SECTION("結合文字が非空文字")
+            {
+                const std::string result = asr::util::join(doc, ',');
+
+                CHECK(result == "abc,");
+            }
+        }
+
+        SECTION("非空、非空")
+        {
+            doc.emplace_back("abc");
+            doc.emplace_back("def");
+
+            SECTION("結合文字が空文字")
+            {
+                const std::string result = asr::util::join(doc, 0x00);
+
+                CHECK(result == "abcdef");
+            }
+
+            SECTION("結合文字が非空文字")
+            {
+                const std::string result = asr::util::join(doc, ',');
+
+                CHECK(result == "abc,def");
+            }
+        }
     }
 }
 
