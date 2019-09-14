@@ -1,4 +1,4 @@
-Checks: '*,-fuchsia-default-arguments,-fuchsia-statically-constructed-objects,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-hicpp-no-array-decay,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast'
+Checks: '*,-fuchsia-default-arguments,-fuchsia-statically-constructed-objects,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-hicpp-no-array-decay,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast,-readability-avoid-const-params-in-decls,-google-runtime-references'
 
 CheckOptions:
   - key:   readability-identifier-naming.ClassCase

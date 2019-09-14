@@ -119,3 +119,61 @@ TEST_CASE("Result2::Result2(コピー)", "[small][util::Result2]")
         CHECK(&sut.errorMessage() != &other.errorMessage());
     }
 }
+
+#ifdef CATCH_CONFIG_ENABLE_BENCHMARKING
+
+void prepare(std::vector<int>& the_container, const size_t the_n_items)
+{
+    the_container.clear();
+    the_container.reserve(the_n_items);
+    for (size_t i = 0; i < the_n_items; ++i)
+    {
+        the_container.push_back(i);
+    }
+}
+
+TEST_CASE("Result2性能評価", "[asr][asr::util][Result2]")
+{
+    constexpr size_t N_ITEMS = 10000000;
+
+    std::vector<int> data_container;
+
+    BENCHMARK("vectorのコピー")
+    {
+        prepare(data_container, N_ITEMS);
+        CHECK(data_container.size() == N_ITEMS);
+
+        std::vector<int> new_container(data_container);  // NOLINT(performance-unnecessary-copy-initialization)
+        CHECK(new_container.size() == N_ITEMS);
+    };
+
+    BENCHMARK("vectorのムーブ")
+    {
+        prepare(data_container, N_ITEMS);
+        CHECK(data_container.size() == N_ITEMS);
+
+        std::vector<int> new_container(std::move(data_container));  // NOLINT(performance-unnecessary-copy-initialization)
+        CHECK(new_container.size() == N_ITEMS);
+    };
+
+    BENCHMARK("Result2の構築(コピー)")
+    {
+        prepare(data_container, N_ITEMS);
+        CHECK(data_container.size() == N_ITEMS);
+
+        asr::util::Result2<std::vector<int>> new_result(data_container);  // NOLINT(performance-unnecessary-copy-initialization)
+        REQUIRE(new_result.succeed());
+        CHECK(new_result.value().size() == N_ITEMS);
+    };
+
+    BENCHMARK("Result2の構築(ムーブ)")
+    {
+        prepare(data_container, N_ITEMS);
+        CHECK(data_container.size() == N_ITEMS);
+
+        asr::util::Result2<std::vector<int>> new_result(std::move(data_container));  // NOLINT(performance-unnecessary-copy-initialization)
+        REQUIRE(new_result.succeed());
+        CHECK(new_result.value().size() == N_ITEMS);
+    };
+}
+#endif
